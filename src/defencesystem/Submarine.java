@@ -15,6 +15,7 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
      */
     public Submarine() {
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -98,7 +99,7 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
     
     @Override
     public void showmsgs(String msg){
-        txtshowmsgs.setText(msg);
+        txtshowmsgs.append(msg+"\n");
     }
     /**
      * @param args the command line arguments

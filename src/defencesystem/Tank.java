@@ -19,7 +19,7 @@ public class Tank extends javax.swing.JFrame implements DefenseUnitsObserver {
     
     @Override
     public void showmsgs(String msg){
-        txtshowmsgs.setText(msg);
+        txtshowmsgs.append(msg+"\n");
     }
 
     /**

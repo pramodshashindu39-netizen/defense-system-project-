@@ -15,11 +15,12 @@ public class Helicopter extends javax.swing.JFrame implements DefenseUnitsObserv
      */
     public Helicopter() {
         initComponents();
+        setVisible(true);
     }
     
     @Override
     public void showmsgs(String msg){
-        txtshowmsgs.setText(msg);
+        txtshowmsgs.append(msg+"\n");
     }
 
     /**

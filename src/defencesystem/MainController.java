@@ -10,11 +10,8 @@ package defencesystem;
  */
 public class MainController extends javax.swing.JFrame {
     
+    DefenseUnitsObserver unitsArray [] ={new Helicopter(),new Tank(),new Submarine()};
     
-
-    /**
-     * Creates new form MainController
-     */
     public MainController() {
         initComponents();
     }
@@ -115,10 +112,15 @@ public class MainController extends javax.swing.JFrame {
         String msg=txtsendmsgs.getText();
         txtsendmsgs.setText("");
         txtshowmsgs.append(msg+"\n");
-        //showmsg(msg);
-        
+        notifyUnits(msg);
     }//GEN-LAST:event_sendbtnActionPerformed
-
+    
+    public void notifyUnits(String msg){
+        for(DefenseUnitsObserver unit:unitsArray){
+            unit.showmsgs(msg);
+        }
+    
+    }
     /**
      * @param args the command line arguments
      */
