@@ -10,5 +10,5 @@ package defencesystem;
  */
 public interface DefenseUnitsObserver {
     public void showmsgs(String msg);
-    
+    public void setText(String status);
 }

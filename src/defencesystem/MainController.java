@@ -31,6 +31,10 @@ public class MainController extends javax.swing.JFrame {
         levelSlider = new javax.swing.JSlider();
         clearArea = new javax.swing.JCheckBox();
         txtsendmsgs = new javax.swing.JTextField();
+        comboBoxSelectDefence = new javax.swing.JComboBox<>();
+        lblSelectDefence = new javax.swing.JLabel();
+        btnCollectInformation = new javax.swing.JButton();
+        lblSoldierCount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Controller");
@@ -53,6 +57,11 @@ public class MainController extends javax.swing.JFrame {
         levelSlider.setPaintTicks(true);
 
         clearArea.setText("Clear Area");
+        clearArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearAreaActionPerformed(evt);
+            }
+        });
 
         txtsendmsgs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,45 +69,78 @@ public class MainController extends javax.swing.JFrame {
             }
         });
 
+        comboBoxSelectDefence.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Helicopter", "Tank", "Submarine" }));
+
+        lblSelectDefence.setText("Select Defence");
+
+        btnCollectInformation.setText("Collect Informations");
+        btnCollectInformation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCollectInformationActionPerformed(evt);
+            }
+        });
+
+        lblSoldierCount.setText("Soldier Count  : ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(levelSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sendbtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(clearArea))
+                                .addComponent(lblSelectDefence, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(clearArea)
+                                .addGap(28, 28, 28))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(sendbtn))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(levelSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(lblSoldierCount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(comboBoxSelectDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(33, 33, 33)
+                                            .addComponent(btnCollectInformation))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clearArea)
+                    .addComponent(lblSelectDefence))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxSelectDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCollectInformation))
+                .addGap(18, 18, 18)
+                .addComponent(lblSoldierCount)
+                .addGap(109, 109, 109)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtsendmsgs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(clearArea)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(sendbtn))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(levelSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                .addGap(19, 19, 19))
+                        .addComponent(levelSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                        .addGap(11, 11, 11))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(sendbtn)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -113,7 +155,30 @@ public class MainController extends javax.swing.JFrame {
         txtsendmsgs.setText("");
         txtshowmsgs.append(msg+"\n");
         notifyUnits(msg);
+        
     }//GEN-LAST:event_sendbtnActionPerformed
+
+    private void clearAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearAreaActionPerformed
+        if (clearArea.isSelected()) {
+            unitsArray[0].setText("Area is cleared");
+            unitsArray[1].setText("Area is cleared");
+            unitsArray[2].setText("Area is cleared");
+        }else{
+            unitsArray[0].setText("Area is not cleared");
+            unitsArray[1].setText("Area is not cleared");
+            unitsArray[2].setText("Area is not cleared");
+            
+        }
+    }//GEN-LAST:event_clearAreaActionPerformed
+
+    public void getSoldierCount(int soldierCount){
+        soldierCount = 20;
+        lblSoldierCount.setText(lblSoldierCount.getText()+ " " + soldierCount);
+    }
+    
+    private void btnCollectInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCollectInformationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCollectInformationActionPerformed
     
     public void notifyUnits(String msg){
         for(DefenseUnitsObserver unit:unitsArray){
@@ -157,8 +222,12 @@ public class MainController extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCollectInformation;
     private javax.swing.JCheckBox clearArea;
+    private javax.swing.JComboBox<String> comboBoxSelectDefence;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblSelectDefence;
+    private javax.swing.JLabel lblSoldierCount;
     private javax.swing.JSlider levelSlider;
     private javax.swing.JButton sendbtn;
     private javax.swing.JTextField txtsendmsgs;

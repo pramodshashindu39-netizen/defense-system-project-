@@ -22,6 +22,11 @@ public class Helicopter extends javax.swing.JFrame implements DefenseUnitsObserv
     public void showmsgs(String msg){
         txtshowmsgs.append(msg+"\n");
     }
+    
+    @Override
+    public void setText(String status){
+        lblAreaStatus.setText(status);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,6 +41,7 @@ public class Helicopter extends javax.swing.JFrame implements DefenseUnitsObserv
         jScrollPane1 = new javax.swing.JScrollPane();
         txtshowmsgs = new javax.swing.JTextArea();
         txtsendmsgs = new javax.swing.JTextField();
+        lblAreaStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,11 +63,16 @@ public class Helicopter extends javax.swing.JFrame implements DefenseUnitsObserv
             }
         });
 
+        lblAreaStatus.setText("Status");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(lblAreaStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(227, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(17, 17, 17)
@@ -77,7 +88,10 @@ public class Helicopter extends javax.swing.JFrame implements DefenseUnitsObserv
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAreaStatus)
+                .addContainerGap(278, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(56, 56, 56)
@@ -139,6 +153,7 @@ public class Helicopter extends javax.swing.JFrame implements DefenseUnitsObserv
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAreaStatus;
     private javax.swing.JButton sendbtn;
     private javax.swing.JTextField txtsendmsgs;
     private javax.swing.JTextArea txtshowmsgs;

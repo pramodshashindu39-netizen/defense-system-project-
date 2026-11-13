@@ -21,6 +21,11 @@ public class Tank extends javax.swing.JFrame implements DefenseUnitsObserver {
     public void showmsgs(String msg){
         txtshowmsgs.append(msg+"\n");
     }
+    
+    @Override
+    public void setText(String status){
+        lblAreaStatus.setText(status);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,10 +36,15 @@ public class Tank extends javax.swing.JFrame implements DefenseUnitsObserver {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblAreaStatus = new javax.swing.JLabel();
         sendbtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtshowmsgs = new javax.swing.JTextArea();
         txtsendmsgs = new javax.swing.JTextField();
+        lblAreaStatus1 = new javax.swing.JLabel();
+        lblAreaStatus2 = new javax.swing.JLabel();
+
+        lblAreaStatus.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,11 +66,18 @@ public class Tank extends javax.swing.JFrame implements DefenseUnitsObserver {
             }
         });
 
+        lblAreaStatus1.setText("jLabel1");
+
+        lblAreaStatus2.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(lblAreaStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(236, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(17, 17, 17)
@@ -73,10 +90,18 @@ public class Tank extends javax.swing.JFrame implements DefenseUnitsObserver {
                             .addGap(65, 65, 65)
                             .addComponent(sendbtn)))
                     .addContainerGap(18, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(136, Short.MAX_VALUE)
+                    .addComponent(lblAreaStatus2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(117, 117, 117)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAreaStatus1)
+                .addContainerGap(278, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(56, 56, 56)
@@ -88,6 +113,11 @@ public class Tank extends javax.swing.JFrame implements DefenseUnitsObserver {
                             .addComponent(sendbtn))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(57, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(152, Short.MAX_VALUE)
+                    .addComponent(lblAreaStatus2)
+                    .addGap(132, 132, 132)))
         );
 
         pack();
@@ -138,6 +168,9 @@ public class Tank extends javax.swing.JFrame implements DefenseUnitsObserver {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAreaStatus;
+    private javax.swing.JLabel lblAreaStatus1;
+    private javax.swing.JLabel lblAreaStatus2;
     private javax.swing.JButton sendbtn;
     private javax.swing.JTextField txtsendmsgs;
     private javax.swing.JTextArea txtshowmsgs;
