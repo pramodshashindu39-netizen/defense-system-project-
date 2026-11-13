@@ -8,7 +8,7 @@ package defencesystem;
  *
  * @author ADMIN
  */
-public class Helicopter extends javax.swing.JFrame {
+public class Helicopter extends javax.swing.JFrame implements DefenseUnitsObserver{
 
     /**
      * Creates new form Helicopter
@@ -17,7 +17,8 @@ public class Helicopter extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void showmsg(String msg){
+    @Override
+    public void showmsgs(String msg){
         txtshowmsgs.setText(msg);
     }
 

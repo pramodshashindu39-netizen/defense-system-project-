@@ -9,6 +9,8 @@ package defencesystem;
  * @author ADMIN
  */
 public class MainController extends javax.swing.JFrame {
+    
+    
 
     /**
      * Creates new form MainController

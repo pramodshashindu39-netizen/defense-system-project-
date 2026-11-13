@@ -8,7 +8,7 @@ package defencesystem;
  *
  * @author ADMIN
  */
-public class Submarine extends javax.swing.JFrame {
+public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserver {
 
     /**
      * Creates new form Submarine
@@ -95,7 +95,11 @@ public class Submarine extends javax.swing.JFrame {
     private void txtsendmsgsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsendmsgsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtsendmsgsActionPerformed
-
+    
+    @Override
+    public void showmsgs(String msg){
+        txtshowmsgs.setText(msg);
+    }
     /**
      * @param args the command line arguments
      */

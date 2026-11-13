@@ -8,6 +8,7 @@ package defencesystem;
  *
  * @author ADMIN
  */
-public class DefenseUnits {
+public interface DefenseUnitsObserver {
+    public void showmsgs(String msg);
     
 }

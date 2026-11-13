@@ -8,13 +8,18 @@ package defencesystem;
  *
  * @author ADMIN
  */
-public class Tank extends javax.swing.JFrame {
+public class Tank extends javax.swing.JFrame implements DefenseUnitsObserver {
 
     /**
      * Creates new form Tank
      */
     public Tank() {
         initComponents();
+    }
+    
+    @Override
+    public void showmsgs(String msg){
+        txtshowmsgs.setText(msg);
     }
 
     /**
