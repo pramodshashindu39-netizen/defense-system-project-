@@ -18,6 +18,7 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
         initComponents();
         setTitle("Submarine");
         setVisible(true);
+        setResizable(false);
     }
 
     /**
@@ -64,7 +65,7 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
             }
         });
 
-        lblAreaStatus.setText("Status");
+        lblAreaStatus.setText("Area is not cleared");
 
         spnAmmoCount.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -82,7 +83,7 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
 
         lblAmmoCount.setText("Ammo Count");
 
-        chkBokPosition.setText("Position");
+        chkBokPosition.setText("In Position");
         chkBokPosition.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 chkBokPositionStateChanged(evt);
@@ -95,6 +96,7 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
         });
 
         btnShoot.setText("SHOOT");
+        btnShoot.setEnabled(false);
         btnShoot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShootActionPerformed(evt);
@@ -102,8 +104,15 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
         });
 
         btnRedar.setText("REDAR OPERATION");
+        btnRedar.setEnabled(false);
+        btnRedar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRedarActionPerformed(evt);
+            }
+        });
 
         btnMissile.setText("MISSILE OPERATION");
+        btnMissile.setEnabled(false);
         btnMissile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMissileActionPerformed(evt);
@@ -111,87 +120,88 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
         });
 
         btnRotateShooting.setText("ROTATE SHOOTING");
+        btnRotateShooting.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(sendbtn)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(btnShoot)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnMissile))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnRedar)
-                                .addGap(38, 38, 38)
-                                .addComponent(btnRotateShooting)))
-                        .addGap(78, 78, 78)
-                        .addComponent(chkBokPosition))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(lblAreaStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblSodierCount))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblAmmoCount)))
-                        .addGap(18, 18, 18)
+                                .addGap(22, 22, 22)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblAreaStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnAmmoCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spnSoldierCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(59, 59, 59))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblSodierCount)
+                                    .addComponent(lblAmmoCount))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(spnAmmoCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spnSoldierCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(32, 32, 32))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(47, 47, 47)
+                                        .addComponent(sendbtn))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(chkBokPosition)
+                                        .addGap(46, 46, 46)))
+                                .addGap(40, 40, 40))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRedar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(btnShoot)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMissile)
+                            .addComponent(btnRotateShooting))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnShoot)
+                            .addComponent(btnMissile))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRedar)
+                            .addComponent(btnRotateShooting))
+                        .addGap(34, 34, 34))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(spnSoldierCount, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSodierCount))
+                            .addComponent(lblSodierCount)
+                            .addComponent(lblAreaStatus))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(spnAmmoCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAmmoCount)))
-                    .addComponent(lblAreaStatus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblAmmoCount))
+                        .addGap(75, 75, 75)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkBokPosition)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnMissile)
-                            .addComponent(btnShoot))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRedar)
-                            .addComponent(btnRotateShooting))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addComponent(chkBokPosition)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(sendbtn)))
-                .addGap(35, 35, 35))
+                        .addComponent(sendbtn))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -232,6 +242,10 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
     private void btnMissileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMissileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMissileActionPerformed
+
+    private void btnRedarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRedarActionPerformed
     
     @Override
     public void showmsgs(String msg){
@@ -317,10 +331,16 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
 
     @Override
     public void notifyStrength(Strength currentStrengthLevel) {
-        if (chkBokPosition.isSelected()) {
-            btnShoot.setEnabled(currentStrengthLevel==Strength.LOW || currentStrengthLevel == Strength.MEDIUM || currentStrengthLevel == Strength.HIGH);
-            btnRotateShooting.setEnabled(currentStrengthLevel == Strength.MEDIUM||currentStrengthLevel == Strength.HIGH);
-            btnMissile.setEnabled(currentStrengthLevel == Strength.HIGH || currentStrengthLevel == Strength.STRENGTH);
+        if (chkBokPosition.isSelected() && lblAreaStatus.getText().equalsIgnoreCase("Area is not cleared")) {
+            btnShoot.setEnabled(currentStrengthLevel==Strength.LOW || currentStrengthLevel == Strength.MEDIUM || currentStrengthLevel == Strength.HIGH ||currentStrengthLevel == Strength.STRENGTH );
+            btnRotateShooting.setEnabled(currentStrengthLevel == Strength.MEDIUM||currentStrengthLevel == Strength.HIGH || currentStrengthLevel==Strength.STRENGTH);
+            btnMissile.setEnabled(currentStrengthLevel == Strength.HIGH || currentStrengthLevel==Strength.STRENGTH);
             btnRedar.setEnabled(currentStrengthLevel == Strength.STRENGTH);
-        }    }
+        }else{
+            btnShoot.setEnabled(false);
+            btnRotateShooting.setEnabled(false);
+            btnMissile.setEnabled(false);
+            btnRedar.setEnabled(false);
+        }    
+    }
 }

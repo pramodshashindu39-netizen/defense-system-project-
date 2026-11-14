@@ -9,12 +9,15 @@ package defencesystem;
  * @author ADMIN
  */
 public class MainController extends javax.swing.JFrame {
-    
+    DefenseUnitsObserver unit;
     DefenseUnitsObserver unitsArray [] ={new Helicopter(),new Tank(),new Submarine()};
     
     public MainController() {
         initComponents();
         setItem();
+        setResizable(false);
+        unit = (DefenseUnitsObserver)comboBoxSelectDefence.getSelectedItem();
+        levelSliderStateChanged(null);
     }
     
     private void setItem(){
@@ -44,6 +47,7 @@ public class MainController extends javax.swing.JFrame {
         lblSoldierCount = new javax.swing.JLabel();
         lblAmmoCount = new javax.swing.JLabel();
         lblPosition = new javax.swing.JLabel();
+        chkBoxsendCommand = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Controller");
@@ -104,47 +108,63 @@ public class MainController extends javax.swing.JFrame {
 
         lblPosition.setText("Position :");
 
+        chkBoxsendCommand.setText("Send Command Private");
+        chkBoxsendCommand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkBoxsendCommandActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(lblSelectDefence, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(clearArea)
+                .addGap(78, 78, 78))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(comboBoxSelectDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(btnCollectInformation)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(93, 93, 93)
                         .addComponent(levelSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSelectDefence, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(clearArea)
-                                .addGap(28, 28, 28))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(lblSoldierCount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(comboBoxSelectDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(33, 33, 33)
-                                    .addComponent(btnCollectInformation))
-                                .addComponent(lblAmmoCount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblPosition, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblAmmoCount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(chkBoxsendCommand)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
                                 .addComponent(sendbtn)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clearArea)
-                    .addComponent(lblSelectDefence))
-                .addGap(9, 9, 9)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(lblSelectDefence))
+                    .addComponent(clearArea))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxSelectDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCollectInformation))
@@ -153,15 +173,21 @@ public class MainController extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblAmmoCount)
                 .addGap(18, 18, 18)
-                .addComponent(lblPosition)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPosition)
+                    .addComponent(chkBoxsendCommand))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(sendbtn)))
-                .addGap(18, 18, 18)
-                .addComponent(levelSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(sendbtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(levelSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                 .addGap(29, 29, 29))
         );
 
@@ -175,8 +201,8 @@ public class MainController extends javax.swing.JFrame {
     private void sendbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendbtnActionPerformed
         String msg=txtsendmsgs.getText();
         txtsendmsgs.setText("");
-        txtshowmsgs.append(msg+"\n");
-        notifyUnits(msg);
+        txtshowmsgs.append("Controll Room : " +msg+"\n");
+        notifyUnits("Controll Room : "+msg);
         
     }//GEN-LAST:event_sendbtnActionPerformed
 
@@ -188,10 +214,7 @@ public class MainController extends javax.swing.JFrame {
         }else{
             unitsArray[0].setText("Area is not cleared");
             unitsArray[1].setText("Area is not cleared");
-            unitsArray[2].setText("Area is not cleared");
-            
-            
-            
+            unitsArray[2].setText("Area is not cleared");  
         }
     }//GEN-LAST:event_clearAreaActionPerformed
 
@@ -199,10 +222,11 @@ public class MainController extends javax.swing.JFrame {
     
     private void btnCollectInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCollectInformationActionPerformed
         
-        DefenseUnitsObserver unit = (DefenseUnitsObserver)comboBoxSelectDefence.getSelectedItem();
+   
         lblSoldierCount.setText("Soldier Count  : "+ unit.getSoldierCountInfo());
         lblAmmoCount.setText("Ammo Count  : "+ unit.getAmmoCountInfo());
         lblPosition.setText("Position : " + unit.isPositionInfo());
+       
         
     
     }//GEN-LAST:event_btnCollectInformationActionPerformed
@@ -227,12 +251,28 @@ public class MainController extends javax.swing.JFrame {
         }else{
             currentStrengthLevel = Strength.STRENGTH;
         }
+        
+        for(DefenseUnitsObserver unit:unitsArray){
+            unit.notifyStrength(currentStrengthLevel);
+        }
+        
     }//GEN-LAST:event_levelSliderStateChanged
+
+    private void chkBoxsendCommandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkBoxsendCommandActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkBoxsendCommandActionPerformed
     
     public void notifyUnits(String msg){
-        for(DefenseUnitsObserver unit:unitsArray){
-            unit.showmsgs(msg);
+        
+        if (chkBoxsendCommand.isSelected()) {
+                unit = (DefenseUnitsObserver)comboBoxSelectDefence.getSelectedItem();
+                unit.showmsgs(msg);
+        }else{
+                for(DefenseUnitsObserver unit:unitsArray){
+                unit.showmsgs(msg);
+            } 
         }
+
     
     }
     /**
@@ -272,6 +312,7 @@ public class MainController extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCollectInformation;
+    private javax.swing.JCheckBox chkBoxsendCommand;
     private javax.swing.JCheckBox clearArea;
     private javax.swing.JComboBox<DefenseUnitsObserver> comboBoxSelectDefence;
     private javax.swing.JScrollPane jScrollPane1;
