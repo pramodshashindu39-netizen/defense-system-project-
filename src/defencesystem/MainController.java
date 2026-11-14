@@ -14,6 +14,13 @@ public class MainController extends javax.swing.JFrame {
     
     public MainController() {
         initComponents();
+        setItem();
+    }
+    
+    private void setItem(){
+        for(DefenseUnitsObserver unit : unitsArray){
+            comboBoxSelectDefence.addItem(unit);
+        }
     }
 
     /**
@@ -35,6 +42,8 @@ public class MainController extends javax.swing.JFrame {
         lblSelectDefence = new javax.swing.JLabel();
         btnCollectInformation = new javax.swing.JButton();
         lblSoldierCount = new javax.swing.JLabel();
+        lblAmmoCount = new javax.swing.JLabel();
+        lblPosition = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Controller");
@@ -55,6 +64,11 @@ public class MainController extends javax.swing.JFrame {
         levelSlider.setMinorTickSpacing(10);
         levelSlider.setPaintLabels(true);
         levelSlider.setPaintTicks(true);
+        levelSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                levelSliderStateChanged(evt);
+            }
+        });
 
         clearArea.setText("Clear Area");
         clearArea.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +83,11 @@ public class MainController extends javax.swing.JFrame {
             }
         });
 
-        comboBoxSelectDefence.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Helicopter", "Tank", "Submarine" }));
+        comboBoxSelectDefence.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxSelectDefenceActionPerformed(evt);
+            }
+        });
 
         lblSelectDefence.setText("Select Defence");
 
@@ -82,17 +100,19 @@ public class MainController extends javax.swing.JFrame {
 
         lblSoldierCount.setText("Soldier Count  : ");
 
+        lblAmmoCount.setText("Ammo Count  :");
+
+        lblPosition.setText("Position :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(levelSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sendbtn))
+                        .addComponent(levelSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,20 +121,21 @@ public class MainController extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(clearArea)
                                 .addGap(28, 28, 28))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lblSoldierCount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(comboBoxSelectDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(33, 33, 33)
+                                    .addComponent(btnCollectInformation))
+                                .addComponent(lblAmmoCount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblPosition, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(lblSoldierCount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(comboBoxSelectDefence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(33, 33, 33)
-                                            .addComponent(btnCollectInformation))))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sendbtn)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,18 +150,19 @@ public class MainController extends javax.swing.JFrame {
                     .addComponent(btnCollectInformation))
                 .addGap(18, 18, 18)
                 .addComponent(lblSoldierCount)
-                .addGap(109, 109, 109)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtsendmsgs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(lblAmmoCount)
+                .addGap(18, 18, 18)
+                .addComponent(lblPosition)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(levelSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                        .addGap(11, 11, 11))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(sendbtn)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtsendmsgs, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sendbtn)))
+                .addGap(18, 18, 18)
+                .addComponent(levelSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -168,17 +190,30 @@ public class MainController extends javax.swing.JFrame {
             unitsArray[1].setText("Area is not cleared");
             unitsArray[2].setText("Area is not cleared");
             
+            
+            
         }
     }//GEN-LAST:event_clearAreaActionPerformed
 
-    public void getSoldierCount(int soldierCount){
-        soldierCount = 20;
-        lblSoldierCount.setText(lblSoldierCount.getText()+ " " + soldierCount);
-    }
+    
     
     private void btnCollectInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCollectInformationActionPerformed
-        // TODO add your handling code here:
+        
+        DefenseUnitsObserver unit = (DefenseUnitsObserver)comboBoxSelectDefence.getSelectedItem();
+        lblSoldierCount.setText("Soldier Count  : "+ unit.getSoldierCountInfo());
+        lblAmmoCount.setText("Ammo Count  : "+ unit.getAmmoCountInfo());
+        lblPosition.setText("Position : " + unit.isPositionInfo());
+        
+    
     }//GEN-LAST:event_btnCollectInformationActionPerformed
+
+    private void comboBoxSelectDefenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSelectDefenceActionPerformed
+           //String selectItem = (String)comboBoxSelectDefence.getSelectedItem();    
+    }//GEN-LAST:event_comboBoxSelectDefenceActionPerformed
+
+    private void levelSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_levelSliderStateChanged
+        
+    }//GEN-LAST:event_levelSliderStateChanged
     
     public void notifyUnits(String msg){
         for(DefenseUnitsObserver unit:unitsArray){
@@ -224,8 +259,10 @@ public class MainController extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCollectInformation;
     private javax.swing.JCheckBox clearArea;
-    private javax.swing.JComboBox<String> comboBoxSelectDefence;
+    private javax.swing.JComboBox<DefenseUnitsObserver> comboBoxSelectDefence;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAmmoCount;
+    private javax.swing.JLabel lblPosition;
     private javax.swing.JLabel lblSelectDefence;
     private javax.swing.JLabel lblSoldierCount;
     private javax.swing.JSlider levelSlider;
