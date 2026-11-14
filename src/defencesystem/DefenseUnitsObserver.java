@@ -15,5 +15,5 @@ public interface DefenseUnitsObserver {
     public int getSoldierCountInfo();
     public int getAmmoCountInfo();
     public String isPositionInfo();
-    public void strangthLevel(int value);
+    public void notifyStrength(Strength currentStrengthLevel);
 }

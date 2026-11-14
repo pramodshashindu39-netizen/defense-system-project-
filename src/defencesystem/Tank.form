@@ -132,7 +132,6 @@
                       <Component id="txtsendmsgs" min="-2" pref="115" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="sendbtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="13" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="21" max="32767" attributes="0"/>

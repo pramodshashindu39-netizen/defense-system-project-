@@ -312,9 +312,14 @@ public class Tank extends javax.swing.JFrame implements DefenseUnitsObserver {
     public String toString(){
        return "Tank";
     }
-
+    
     @Override
-    public void strangthLevel(int value) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void notifyStrength(Strength currentStrengthLevel) {
+        if (chkBokPosition.isSelected()) {
+            btnShoot.setEnabled(currentStrengthLevel==Strength.LOW || currentStrengthLevel == Strength.MEDIUM || currentStrengthLevel == Strength.HIGH);
+            btnRotateShooting.setEnabled(currentStrengthLevel == Strength.MEDIUM||currentStrengthLevel == Strength.HIGH);
+            btnMissile.setEnabled(currentStrengthLevel == Strength.HIGH || currentStrengthLevel == Strength.STRENGTH);
+            btnRedar.setEnabled(currentStrengthLevel == Strength.STRENGTH);
+        }    
     }
 }

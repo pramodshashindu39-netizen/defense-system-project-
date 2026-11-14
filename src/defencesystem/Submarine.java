@@ -176,9 +176,9 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkBokPosition)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnShoot)
-                            .addComponent(btnMissile))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMissile)
+                            .addComponent(btnShoot))
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRedar)
@@ -314,8 +314,13 @@ public class Submarine extends javax.swing.JFrame implements DefenseUnitsObserve
        return "Submarine";
     }
 
+
     @Override
-    public void strangthLevel(int value) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public void notifyStrength(Strength currentStrengthLevel) {
+        if (chkBokPosition.isSelected()) {
+            btnShoot.setEnabled(currentStrengthLevel==Strength.LOW || currentStrengthLevel == Strength.MEDIUM || currentStrengthLevel == Strength.HIGH);
+            btnRotateShooting.setEnabled(currentStrengthLevel == Strength.MEDIUM||currentStrengthLevel == Strength.HIGH);
+            btnMissile.setEnabled(currentStrengthLevel == Strength.HIGH || currentStrengthLevel == Strength.STRENGTH);
+            btnRedar.setEnabled(currentStrengthLevel == Strength.STRENGTH);
+        }    }
 }

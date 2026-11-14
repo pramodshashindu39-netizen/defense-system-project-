@@ -9,5 +9,5 @@ package defencesystem;
  * @author ADMIN
  */
 enum Strength {
-    CLOSED , Low , MEDIUM , HIGH;
+    CLOSED , LOW , MEDIUM , HIGH ,STRENGTH;
 }

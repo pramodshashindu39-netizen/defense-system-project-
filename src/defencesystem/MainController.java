@@ -212,7 +212,21 @@ public class MainController extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxSelectDefenceActionPerformed
 
     private void levelSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_levelSliderStateChanged
+        int sliderValue=levelSlider.getValue();
         
+        Strength currentStrengthLevel;
+        
+        if (sliderValue==0) {
+            currentStrengthLevel = Strength.CLOSED;
+        }else if (sliderValue<=25) {
+            currentStrengthLevel = Strength.LOW;
+        }else if (sliderValue<=50) {
+            currentStrengthLevel = Strength.MEDIUM;
+        }else if(sliderValue<=75){
+            currentStrengthLevel = Strength.HIGH;
+        }else{
+            currentStrengthLevel = Strength.STRENGTH;
+        }
     }//GEN-LAST:event_levelSliderStateChanged
     
     public void notifyUnits(String msg){

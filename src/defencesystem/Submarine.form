@@ -102,9 +102,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="chkBokPosition" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnShoot" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnMissile" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnShoot" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
